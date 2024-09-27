@@ -1,0 +1,60 @@
+#include <stdio.h>
+#include <string.h>
+
+// Estrutura para armazenar os requisitos do software
+typedef struct {
+    char descricao[200];  // Descrição do requisito
+    int impactoUsuario;   // Impacto no usuário final (1 a 10)
+    int viabilidadeTecnica; // Viabilidade técnica (1 a 10)
+    char prioridade[10];  // Classificação da prioridade: Alta, Média ou Baixa
+} Requisito;
+
+// Função para classificar a prioridade de cada requisito
+void classificarPrioridade(Requisito *req) {
+    if (req->impactoUsuario >= 8 && req->viabilidadeTecnica >= 7) {
+        strcpy(req->prioridade, "Alta");
+    } else if (req->impactoUsuario >= 5 || req->viabilidadeTecnica >= 5) {
+        strcpy(req->prioridade, "Média");
+    } else {
+        strcpy(req->prioridade, "Baixa");
+    }
+}
+
+int main() {
+    int n, i;
+
+    // Solicitar a quantidade de requisitos
+    printf("Quantos requisitos deseja inserir? ");
+    scanf("%d", &n);
+
+    Requisito requisitos[n];
+
+    // Entrada dos requisitos
+    for (i = 0; i < n; i++) {
+        printf("\nRequisito %d:\n", i + 1);
+        printf("Descrição do requisito: ");
+        getchar();  // Limpar o buffer de entrada
+        fgets(requisitos[i].descricao, sizeof(requisitos[i].descricao), stdin);
+        requisitos[i].descricao[strcspn(requisitos[i].descricao, "\n")] = '\0'; // Remove a quebra de linha
+
+        printf("Impacto no usuário final (1 a 10): ");
+        scanf("%d", &requisitos[i].impactoUsuario);
+
+        printf("Viabilidade técnica (1 a 10): ");
+        scanf("%d", &requisitos[i].viabilidadeTecnica);
+
+        // Classificar a prioridade do requisito
+        classificarPrioridade(&requisitos[i]);
+    }
+
+    // Exibição dos requisitos com suas prioridades
+    printf("\nClassificação dos requisitos:\n");
+    for (i = 0; i < n; i++) {
+        printf("Requisito: %s\n", requisitos[i].descricao);
+        printf("Impacto no usuário final: %d\n", requisitos[i].impactoUsuario);
+        printf("Viabilidade técnica: %d\n", requisitos[i].viabilidadeTecnica);
+        printf("Prioridade: %s\n\n", requisitos[i].prioridade);
+    }
+
+    return 0;
+}
