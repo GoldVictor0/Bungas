@@ -1,0 +1,73 @@
+#include <stdio.h>
+#include <locale.h>
+
+int main() {
+    
+    setlocale(LC_ALL,"Portuguese");
+    
+    int planejamento = 0;
+    int design = 0;
+    int desenvolvimento = 0;
+    int testes = 0;
+    int implantacao = 0;
+    int escolha;
+    
+    printf("Simulador de Desenvolvimento do Software para Aprendizado de LIBRAS\n");
+    
+    while (planejamento < 100 || design < 100 || desenvolvimento < 100 || testes < 100 || implantacao < 100) {
+        printf("\n----------------------------------------\n");
+        printf("\nStatus Atual do Projeto:\n");
+        printf("1. Planejamento: %d%% concluído\n", planejamento);
+        printf("2. Design: %d%% concluído\n", design);
+        printf("3. Desenvolvimento: %d%% concluído\n", desenvolvimento);
+        printf("4. Testes: %d%% concluído\n", testes);
+        printf("5. Implantação: %d%% concluído\n", implantacao);
+        
+        printf("\nEscolha uma fase para atualizar o progresso (1-5): ");
+        scanf("%d", &escolha);
+        
+        int incremento;
+        switch (escolha) {
+            case 1:
+                printf("------\nDefina o incremento de progresso para Planejamento (atual: %d%%): ", planejamento);
+                scanf("%d", &incremento);
+                planejamento += incremento;
+                if (planejamento > 100) planejamento = 100;
+                break;
+            case 2:
+                printf("------\nDefina o incremento de progresso para Design (atual: %d%%): ", design);
+                scanf("%d", &incremento);
+                design += incremento;
+                if (design > 100) design = 100;
+                break;
+            case 3:
+                printf("------\nDefina o incremento de progresso para Desenvolvimento (atual: %d%%): ", desenvolvimento);
+                scanf("%d", &incremento);
+                desenvolvimento += incremento;
+                if (desenvolvimento > 100) desenvolvimento = 100;
+                break;
+            case 4:
+                printf("------\nDefina o incremento de progresso para Testes (atual: %d%%): ", testes);
+                scanf("%d", &incremento);
+                testes += incremento;
+                if (testes > 100) testes = 100;
+                break;
+            case 5:
+                printf("------\nDefina o incremento de progresso para Implantação (atual: %d%%): ", implantacao);
+                scanf("%d", &incremento);
+                implantacao += incremento;
+                if (implantacao > 100) implantacao = 100;
+                break;
+            default:
+                printf("Escolha inválida. Tente novamente.\n");
+        }
+        
+        if (planejamento == 100 && design == 100 && desenvolvimento == 100 && testes == 100 && implantacao == 100) {
+            printf("\n\n----------------------------------------------\n\n");
+            printf("Parabéns! Todas as fases do projeto foram concluídas com sucesso!\n");
+            break;
+        }
+    }
+    
+    return 0;
+}
