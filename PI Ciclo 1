@@ -1,59 +1,43 @@
 #include <stdio.h>
-#include <string.h>
-
-// Estrutura para armazenar os requisitos do software
-typedef struct {
-    char descricao[200];  // Descrição do requisito
-    int impactoUsuario;   // Impacto no usuário final (1 a 10)
-    int viabilidadeTecnica; // Viabilidade técnica (1 a 10)
-    char prioridade[10];  // Classificação da prioridade: Alta, Média ou Baixa
-} Requisito;
-
-// Função para classificar a prioridade de cada requisito
-void classificarPrioridade(Requisito *req) {
-    if (req->impactoUsuario >= 8 && req->viabilidadeTecnica >= 7) {
-        strcpy(req->prioridade, "Alta");
-    } else if (req->impactoUsuario >= 5 || req->viabilidadeTecnica >= 5) {
-        strcpy(req->prioridade, "Média");
-    } else {
-        strcpy(req->prioridade, "Baixa");
-    }
-}
 
 int main() {
-    int n, i;
+    int nota;
+    int desempenho;
+    int nivelConteudo;
 
-    // Solicitar a quantidade de requisitos
-    printf("Quantos requisitos deseja inserir? ");
-    scanf("%d", &n);
+    printf("Qual a sua nota no último teste (0 a 10)? ");
+    scanf("%d", &nota);
 
-    Requisito requisitos[n];
-
-    // Entrada dos requisitos
-    for (i = 0; i < n; i++) {
-        printf("\nRequisito %d:\n", i + 1);
-        printf("Descrição do requisito: ");
-        getchar();  // Limpar o buffer de entrada
-        fgets(requisitos[i].descricao, sizeof(requisitos[i].descricao), stdin);
-        requisitos[i].descricao[strcspn(requisitos[i].descricao, "\n")] = '\0'; // Remove a quebra de linha
-
-        printf("Impacto no usuário final (1 a 10): ");
-        scanf("%d", &requisitos[i].impactoUsuario);
-
-        printf("Viabilidade técnica (1 a 10): ");
-        scanf("%d", &requisitos[i].viabilidadeTecnica);
-
-        // Classificar a prioridade do requisito
-        classificarPrioridade(&requisitos[i]);
+    if (nota >= 8) {
+        desempenho = 3;
+    } else if (nota >= 5) {
+        desempenho = 2;
+    } else {
+        desempenho = 1;
     }
 
-    // Exibição dos requisitos com suas prioridades
-    printf("\nClassificação dos requisitos:\n");
-    for (i = 0; i < n; i++) {
-        printf("Requisito: %s\n", requisitos[i].descricao);
-        printf("Impacto no usuário final: %d\n", requisitos[i].impactoUsuario);
-        printf("Viabilidade técnica: %d\n", requisitos[i].viabilidadeTecnica);
-        printf("Prioridade: %s\n\n", requisitos[i].prioridade);
+    if (desempenho == 3) {
+        nivelConteudo = 3;
+        printf("\nVocê está indo muito bem! Vamos avançar para tópicos mais difíceis!\n");
+    } else if (desempenho == 2) {
+        nivelConteudo = 2;
+        printf("\nVocê está indo bem, mas precisa de mais prática. Vamos revisar o conteúdo anterior e também introduzir novos conceitos!\n");
+    } else {
+        nivelConteudo = 1;
+        printf("\nParece que você tem dificuldades com o conteúdo básico. Vamos focar em revisar os conceitos iniciais.\n");
+    }
+
+    printf("\nApresentando conteúdo de nível %d...\n", nivelConteudo);
+    
+    if (nivelConteudo == 3) {
+        printf("Tópico avançado: Algoritmos de busca e ordenação.\n");
+        printf("Tópico avançado: Programação dinâmica.\n");
+    } else if (nivelConteudo == 2) {
+        printf("Tópico intermediário: Estruturas de dados como listas e filas.\n");
+        printf("Tópico intermediário: Complexidade algorítmica.\n");
+    } else {
+        printf("Tópico básico: Variáveis e tipos de dados.\n");
+        printf("Tópico básico: Estruturas de controle (if, else, loops).\n");
     }
 
     return 0;
