@@ -5,12 +5,7 @@ int main() {
     
     setlocale(LC_ALL,"Portuguese");
     
-    int planejamento = 0;
-    int design = 0;
-    int desenvolvimento = 0;
-    int testes = 0;
-    int implantacao = 0;
-    int escolha;
+    int planejamento = 0, design = 0, desenvolvimento = 0, testes = 0, implantacao = 0, escolha;
     
     printf("Simulador de Desenvolvimento do Software para Aprendizado de LIBRAS\n");
     
